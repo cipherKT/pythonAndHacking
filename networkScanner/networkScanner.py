@@ -10,13 +10,18 @@ def scan(ip):
     # arp_request_broadcast.show()
     # print(arp_request_broadcast.summary())  Created arp request directed to broadcast MAC asking for IP.
     # print(broadcast.summary())
-    answered , unanswered = scapy.srp(arp_request_broadcast , timeout = 1) #we can also use sr(send recieve) method of scapy but srp allow us to send packets with custom ether 
+    answered= scapy.srp(arp_request_broadcast , timeout = 1 ,verbose = False)[0] #we can also use sr(send recieve) method of scapy but srp allow us to send packets with custom ether 
     # above function will return two list one with answered packets and one with unanswered packets 
     # Timeout will wait for 1s and will terminate after 1s if it doesnt get response 
     # print(answered.summary())
     # answered.show()
     # unanswered.show()
-
+    print("IP\t\t\tMAC Address\n- - - - - - - - - - - - - - - - - - - - - - - - - ")
+    for element in answered:
+        print(element[1].psrc + "\t\t")
+        print(element[1].hwsrc)
+        print("-------------------------------------------")
+    
 
 
 
